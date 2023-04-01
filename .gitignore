@@ -4,3 +4,4 @@ __pycache__/
 *.pyd
 virt/
 *.log
+db_settings.py
