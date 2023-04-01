@@ -1,3 +1,54 @@
 {% load static %}
-<script src="{% static 'blog/libs/three.min.js' %}"></script>
-<b>HELLO WORLD</b>
+<html>
+  <head>
+    <script src="{% static 'travel/libs/three.min.js' %}"></script>
+    <script src="{% static 'travel/libs/three/examples/jsm/fonts/helvetiker_regular.typeface.json' %}"></script>
+    <link rel="stylesheet" href="{% static 'travel/styles.css' %}" />
+  </head>
+  <body>
+    <div>
+      <b>HELLO WORLD! Yes!</b>
+    </div>
+
+    <script>
+        let scene, camera, renderer, cube, textMesh;
+
+        function init() {
+            // Create a scene
+            scene = new THREE.Scene();
+
+            // Create a camera
+            const aspectRatio = window.innerWidth / window.innerHeight;
+            camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
+            camera.position.z = 5;
+
+            // Create a renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Create a red cube
+            const geometry = new THREE.BoxGeometry(1, 1, 1);
+            const material = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Red color
+            cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+            
+            // Render the scene
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate the cube on the Z-axis
+            const rotationSpeed = (2 * Math.PI) / (30 * 60); // 360 degrees (2 * PI) in 30 seconds, divided by 60 frames per second
+            cube.rotation.z += rotationSpeed;
+
+            // Render the scene
+            renderer.render(scene, camera);
+        }
+
+        init();
+    </script>
+  </body>
+</html>
