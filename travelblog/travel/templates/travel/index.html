@@ -2,7 +2,6 @@
 <html>
   <head>
     <script src="{% static 'travel/libs/three.min.js' %}"></script>
-    <script src="{% static 'travel/libs/three/examples/jsm/fonts/helvetiker_regular.typeface.json' %}"></script>
     <link rel="stylesheet" href="{% static 'travel/styles.css' %}" />
   </head>
   <body>
@@ -11,7 +10,7 @@
     </div>
 
     <script>
-        let scene, camera, renderer, cube, textMesh;
+        let scene, camera, renderer, cube;
 
         function init() {
             // Create a scene
@@ -32,7 +31,12 @@
             const material = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Red color
             cube = new THREE.Mesh(geometry, material);
             scene.add(cube);
-            
+
+            // Add click event listener to move the camera closer
+            window.addEventListener('click', () => {
+                camera.position.z -= 1;
+            });
+
             // Render the scene
             animate();
         }
