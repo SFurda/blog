@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+}
+
+/* Header */
+header {
+    background-color: #000000; /* Black */
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Blog title */
+.blog-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff; /* White */
+    text-decoration: none;
+}
+
+/* Navigation menu */
+.nav-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu li {
+    float: left;
+}
+
+.nav-menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+/* Tab hover background colors */
+/*About and Contact Nav Items
+.nav-menu li:nth-child(1):hover a {
+    
+}
+.nav-menu li:nth-child(2):hover a {
+   
+}
+*/
+.nav-menu li:nth-child(3):hover a {
+    background-color: #4CAF50; /* Green */
+    color: black;
+}
+
+.nav-menu li:nth-child(4):hover a {
+    background-color: #2196F3; /* Blue */
+    color: black;
+}
+
+.nav-menu li:nth-child(5):hover a {
+    background-color: #795548; /* Brown */
+    color: black;
+}
