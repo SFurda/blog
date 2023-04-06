@@ -5,3 +5,4 @@ __pycache__/
 virt/
 *.log
 db_settings.py
+secret_key.py
