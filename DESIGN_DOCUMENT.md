@@ -1,4 +1,4 @@
-# The Wonder Good Desighn Document
+# The Wonder Good Design Document
 
 ## Table of content:
 - [Color Palette](#ColorPalette)
