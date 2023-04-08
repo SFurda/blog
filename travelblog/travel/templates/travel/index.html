@@ -1,5 +1,18 @@
 {% extends 'travel/layout.html' %}
 
 {% block content %}
-<h1>Hello World!</h1>
+    <h1>Travel Posts</h1>
+    <ul>
+    {% for post in posts %}
+        <li>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.description }}</p>
+            <p><strong>Category:</strong> {{ post.category.name }}</p>
+            <p><strong>Tags:</strong> {% for tag in post.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <p><strong>Published on:</strong> {{ post.pub_date }}</p>
+        </li>
+    {% empty %}
+        <li>No travel posts available.</li>
+    {% endfor %}
+    </ul>
 {% endblock %}
