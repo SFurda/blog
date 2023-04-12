@@ -9,13 +9,28 @@
       href="https://fonts.googleapis.com/css?family=Roboto:400,700|Open+Sans:400,700&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="{% static 'travel/index.css' %}" />
     <link rel="stylesheet" href="{% static 'travel/styles.css' %}" />
     <link rel="stylesheet" href="{% static 'travel/header.css' %}" />
+    <link rel="stylesheet" href="{% static 'travel/categories.css' %}">
+    
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+    <link rel="stylesheet" href="{% static 'travel/createpost.css' %}" />
+    {% endif %}
 
     <title>{% block title %}The Wonder Good{% endblock %}</title>
   </head>
   <body>
     {% include 'travel/header.html' %}
+
+    <div>
+      {% if request.user.is_authenticated and request.user.is_superuser %}
+
+      <a href="{% url 'createpost' %}">Create Post</a>
+
+      {% endif %}
+    </div>
 
     <div>{% block content %} {% endblock %}</div>
 
