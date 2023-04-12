@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.adsense-link {
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.adsense-left {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+}
+
+.adsense-right {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.travel-posts {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.travel-posts h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.travel-posts ul {
+    list-style: none;
+    padding: 0;
+}
+
+.travel-posts li {
+    background-color: #fafafa;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.travel-posts h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #444;
+}
+
+.travel-posts p {
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.travel-posts strong {
+    color: #333;
+}
+
+
+.post-content {
+    display: inline-block;
+    width: calc(75%);
+    vertical-align: top;
+}
+
+.post-image {
+    display: inline-block;
+    width: 250px;
+    padding-left: 20px;
+}
+
+.post-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.video-btn {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #148101;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.video-btn:hover {
+    background-color: #0056b3;
+}

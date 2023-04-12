@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.template.defaultfilters import slugify
 # Create your models here.
 
 class UserProfile(models.Model):
@@ -15,9 +16,17 @@ class Category(models.Model):
     ]
 
     name = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    slug = models.SlugField(max_length=50, unique=True, editable=False)
 
     def __str__(self):
         return self.name
+
+    def generate_slug(self):
+        return slugify(self.get_name_display())
+
+    def save(self, *args, **kwargs):
+        self.slug = self.generate_slug()
+        super().save(*args, **kwargs)
 
 class Tag(models.Model):
     TAG_CHOICES = [
