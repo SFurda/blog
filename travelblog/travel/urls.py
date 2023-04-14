@@ -11,5 +11,5 @@ urlpatterns = [
 
     path('create_wellness_post/', views.create_wellness_post, name='create_wellness_post'),
     path('wellness/',views.wellness, name='wellness'),
-    path('wellness/category/<slug:category_slug>/', views.travel, name='wellness_by_category'),
+    path('wellness/wellness_category/<slug:category_slug>/', views.wellness, name='wellness_by_category'),
 ]
