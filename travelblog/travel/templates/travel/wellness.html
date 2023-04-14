@@ -1,4 +1,4 @@
-{% extends 'travel/layout.html' %} 
+{% extends 'travel/layout.html' %}
 
 {% block content %}
 
@@ -7,18 +7,17 @@
   <div class="adsense-link adsense-right">Adsense Link - right</div>
 
   <div class="travel-posts">
-
     <div class="categories-container">
         <div class="categories-heading">Categories:</div>
         {% for category in categories %}
             {% if category.slug %}
-                <a href="{% url 'travel_by_category' category.slug %}" class="category-item">{{ category.name }}</a>
+                <a href="{% url 'wellness_by_category' category.slug %}" class="category-item">{{ category.name }}</a>
             
             {% endif %}
         {% endfor %}
     </div>
   
-    <h1>Travel Posts</h1>
+    <h1>Wellness Posts</h1>
     <ul>
       {% for post in posts %}
       <li>
@@ -35,9 +34,7 @@
         {% if post.image_url %}
         <div class="post-image">
           <img src="{{ post.image_url }}" alt="{{ post.title }}" />
-          <a href="{{ post.youtube_url }}" target="_blank" class="video-btn"
-            >Watch Video</a
-          >
+          <a href="{{ post.youtube_url }}" target="_blank" class="video-btn">Watch Video</a>
         </div>
         {% endif %}
       </li>

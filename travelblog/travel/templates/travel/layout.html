@@ -28,7 +28,7 @@
       {% if request.user.is_authenticated and request.user.is_superuser %}
 
       <a href="{% url 'createpost' %}">Create Post</a>
-      <a href="#">Create Wellness Post</a>
+      <a href="{% url 'create_wellness_post' %}">Create Wellness Post</a>
       <a href="#">Create Gear Post</a>
 
       {% endif %}
