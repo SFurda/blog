@@ -95,6 +95,24 @@ body {
     border-radius: 5px;
 }
 
+.post-gear-image {
+    display: inline-block;
+    width: 250px;
+    padding-left: 20px;
+    
+}
+
+.post-gear-image img{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: 50%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
 .video-btn {
     display: block;
     margin-top: 10px;
@@ -109,3 +127,4 @@ body {
 .video-btn:hover {
     background-color: #0056b3;
 }
+

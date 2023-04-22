@@ -2,22 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.template.defaultfilters import slugify
+
 # Create your models here.
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-######## TRAVEL THEME ##############
-class Category(models.Model):
-    CATEGORY_CHOICES = [
-        ('destinations', 'Destinations'),
-        ('travel_tips_guides', 'Travel Tips & Guides'),
-        ('adventure_travel', 'Adventure Travel'),
-        ('travel_stories', 'Travel Stories'),
-    ]
-
-    name = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+class CategoryBase(models.Model):
+    name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, unique=True, editable=False)
+
+    class Meta:
+        abstract = True
 
     def __str__(self):
         return self.name
@@ -29,7 +25,40 @@ class Category(models.Model):
         self.slug = self.generate_slug()
         super().save(*args, **kwargs)
 
-class Tag(models.Model):
+class TagBase(models.Model):
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+class BaseModel(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    youtube_url = models.URLField(blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.title
+
+# Travel theme
+class Category(CategoryBase):
+    CATEGORY_CHOICES = [
+        ('Destinations', 'Destinations'),
+        ('Travel Tips & Guides', 'Travel Tips & Guides'),
+        ('Adventure Travel', 'Adventure Travel'),
+        ('Travel Storie', 'Travel Stories'),
+    ]
+
+    name = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+
+class Tag(TagBase):
     TAG_CHOICES = [
         ('solo_travel', 'Solo Travel'),
         ('budget_travel', 'Budget Travel'),
@@ -44,74 +73,67 @@ class Tag(models.Model):
 
     name = models.CharField(max_length=50, choices=TAG_CHOICES)
 
-    def __str__(self):
-        return self.name
-
-class Travel(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    youtube_url = models.URLField(blank=True, null=True)
-    image_url = models.URLField(blank=True, null=True)
+class Travel(BaseModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
     pub_date = models.DateTimeField(default=timezone.now)
 
-
-    def __str__(self):
-        return self.title
-########## END OF TRAVEl THEME ####################
-
-############# WELLNESS THEME ##################
-
-class WellnessCategory(models.Model):
+# Wellness theme
+class WellnessCategory(CategoryBase):
     WELLNESS_CATEGORY_CHOICES = [
-        ('wellness_retreats', 'Wellness Retreats'),
-        ('mindfulness_and_mental_health', 'Mindfulness & Mental Health'),
-        ('food_and_nutrition', 'Food & Nutrition'),
-        ('fitness_and_excercise', 'Fitness & Exercise'),
-        ('persoanl_wellness_stories', 'Personal Wellness Stories'),
+        ('Wellness Retreats', 'Wellness Retreats'),
+        ('Mindfulness & Mental Health', 'Mindfulness & Mental Health'),
+        ('Food & Nutrition', 'Food & Nutrition'),
+        ('Fitness & Exercise', 'Fitness & Exercise'),
+        ('Personal Wellness Storie', 'Personal Wellness Stories'),
     ]
 
     name = models.CharField(max_length=50, choices=WELLNESS_CATEGORY_CHOICES)
-    slug = models.SlugField(max_length=50, unique=True, editable=False)
 
-    def __str__(self):
-        return self.name
-
-    def generate_slug(self):
-        return slugify(self.get_name_display())
-
-    def save(self, *args, **kwargs):
-        self.slug = self.generate_slug()
-        super().save(*args, **kwargs)
-
-class WellnessTags(models.Model):
+class WellnessTags(TagBase):
     WELLNESS_TAG_CHOICES = [
         ('stress_management', 'Stress Management'),
         ('mental_health', 'Mental Health'),
         ('workout', 'Workouts'),
         ('food', 'Food'),
         ('recepies', 'Recepies'),
-        ('hteol_fitness', 'Hotel Fitness'),
-        
+        ('hotel_fitness', 'Hotel Fitness'),
     ]
 
     name = models.CharField(max_length=50, choices=WELLNESS_TAG_CHOICES)
 
-    def __str__(self):
-        return self.name
-
-class Wellness(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    youtube_url = models.URLField(blank=True, null=True)
-    image_url = models.URLField(blank=True, null=True)
+class Wellness(BaseModel):
     category = models.ForeignKey(WellnessCategory, on_delete=models.CASCADE)
     tags = models.ManyToManyField(WellnessTags)
     pub_date = models.DateTimeField(default=timezone.now)
 
+class GearCategory(CategoryBase):
+    GEAR_CATEGORY_CHOICES = [
+        ('Gear Reviews', 'Gear Reviews'),
+        ('Gear Guides', 'Gear Guides'),
+        ('Travel Gadgets', 'Travel Gadgets'),
+        ('Outdoor Gear', 'Outdoor Gear'),
+    ]
 
-    def __str__(self):
-        return self.title
+    name = models.CharField(max_length=50, choices=GEAR_CATEGORY_CHOICES)
+
+class GearTags(TagBase):
+    GEAR_TAG_CHOICES = [
+        ('Backpacks', 'Backpacks'),
+        ('Travel Clothing', 'Travel Clothing'),
+        ('Travel Accessories', 'Travel Accessories'),
+        ('Camera Gear', 'Camera Gear'),
+        ('Hiking Gear', 'Hiking Gear'),
+        ('Travel Tech', 'Travel Tech'),
+        ('Apps', 'Apps'),
+    ]
+
+    name = models.CharField(max_length=50, choices=GEAR_TAG_CHOICES)
+
+class Gear(BaseModel):
+    category = models.ForeignKey(GearCategory, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(GearTags)
+    pub_date = models.DateTimeField(default=timezone.now)
+    image_url_1 = models.URLField(blank=True, null=True)
+    image_url_2 = models.URLField(blank=True, null=True)
+    image_url_3 = models.URLField(blank=True, null=True)

@@ -1,4 +1,5 @@
-{% extends 'travel/layout.html' %}
+{% extends 'travel/layout.html' %} 
+
 
 {% block content %}
 
@@ -7,22 +8,24 @@
   <div class="adsense-link adsense-right">Adsense Link - right</div>
 
   <div class="travel-posts">
+
     <div class="categories-container">
         <div class="categories-heading">Categories:</div>
         {% for category in categories %}
             {% if category.slug %}
-                <a href="{% url 'wellness_by_category' category.slug %}" class="category-item">{{ category.name }}</a>
+                <a href="{% url 'gear_by_category' category.slug %}" class="category-item">{{ category.name }}</a>
             
             {% endif %}
         {% endfor %}
     </div>
   
-    <h1>Wellness Posts</h1>
+    <h1>Travel Posts</h1>
     <ul>
       {% for post in posts %}
       <li>
         <div class="post-content">
-          <h2><a href="{% url 'wellness_post_read' post.pk %}">{{ post.title }}</a></h2>
+          <h2><a href="{% url 'gear_post_read' post.pk %}">{{ post.title }}</a></h2>
+
           <p>{{ post.description }}</p>
           <p><strong>Category:</strong> {{ post.category.name }}</p>
           <p>
@@ -31,9 +34,9 @@
           </p>
           <p><strong>Published on:</strong> {{ post.pub_date }}</p>
         </div>
-        {% if post.image_url %}
+        {% if post.image_url_1 %}
         <div class="post-image">
-          <img src="{{ post.image_url }}" alt="{{ post.title }}" />
+          <img src="{{ post.image_url_1 }}" alt="{{ post.title }}" />
           <a href="{{ post.youtube_url }}" target="_blank" class="video-btn">Watch Video</a>
         </div>
         {% endif %}
