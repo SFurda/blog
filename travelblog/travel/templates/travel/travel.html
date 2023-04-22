@@ -23,7 +23,7 @@
       {% for post in posts %}
       <li>
         <div class="post-content">
-          <h2>{{ post.title }}</h2>
+          <h2><a href="{% url 'travel_post_read' post.pk %}">{{ post.title }}</a></h2>
           <p>{{ post.description }}</p>
           <p><strong>Category:</strong> {{ post.category.name }}</p>
           <p>
